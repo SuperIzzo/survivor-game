@@ -70,14 +70,14 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6xlih"]
 height = 34.0
 
-[node name="Node2D" type="Node2D"]
-
-[node name="Player" type="Area2D" parent="."]
+[node name="Player" type="Area2D"]
 script = ExtResource("1_57lrx")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_864le")
 frame_progress = 0.16374
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_6xlih")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

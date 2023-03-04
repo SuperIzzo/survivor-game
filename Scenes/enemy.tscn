@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://dqfueckqakcbe"]
+
+[ext_resource type="Script" path="res://Scenes/Mob.gd" id="1_20wix"]
+[ext_resource type="Texture2D" uid="uid://cso1cny0onimq" path="res://Assets/Textures/DungeonCrawl_ProjectUtumnoTileset.png" id="1_cs2pr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db7aw"]
+atlas = ExtResource("1_cs2pr")
+region = Rect2(864, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0j0o"]
+atlas = ExtResource("1_cs2pr")
+region = Rect2(896, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq5nn"]
+atlas = ExtResource("1_cs2pr")
+region = Rect2(928, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwwu1"]
+atlas = ExtResource("1_cs2pr")
+region = Rect2(960, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aghbk"]
+atlas = ExtResource("1_cs2pr")
+region = Rect2(992, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml7p6"]
+atlas = ExtResource("1_cs2pr")
+region = Rect2(1024, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2gna"]
+atlas = ExtResource("1_cs2pr")
+region = Rect2(1056, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sget3"]
+atlas = ExtResource("1_cs2pr")
+region = Rect2(1088, 384, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wqwqg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db7aw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0j0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uq5nn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwwu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aghbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml7p6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2gna")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sget3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_28jlq"]
+radius = 16.0
+
+[node name="Mob" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_20wix")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wqwqg")
+frame = 7
+frame_progress = 0.708328
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_28jlq")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

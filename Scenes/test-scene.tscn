@@ -1,7 +1,43 @@
-[gd_scene load_steps=2 format=3 uid="uid://cckqowpa0nbg4"]
+[gd_scene load_steps=6 format=3 uid="uid://cckqowpa0nbg4"]
 
 [ext_resource type="PackedScene" uid="uid://bvetfy73p8471" path="res://Assets/Maps/test-map.tscn" id="1_s48sj"]
+[ext_resource type="Script" path="res://Scenes/GameLogic.gd" id="2_n20w1"]
+[ext_resource type="PackedScene" uid="uid://dqfueckqakcbe" path="res://Scenes/enemy.tscn" id="3_0cq5r"]
+[ext_resource type="PackedScene" uid="uid://cq7j51ynwgcxa" path="res://Scenes/Player.tscn" id="4_kwype"]
+
+[sub_resource type="Curve2D" id="Curve2D_oshl3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 1152, 648, 0, 0, 0, 0, 0, 648, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" parent="." instance=ExtResource("1_s48sj")]
+
+[node name="GameLogic" type="Node" parent="."]
+script = ExtResource("2_n20w1")
+mob_scene = ExtResource("3_0cq5r")
+
+[node name="SpawnTimer" type="Timer" parent="GameLogic"]
+
+[node name="RespawnTimer" type="Timer" parent="GameLogic"]
+wait_time = 3.0
+one_shot = true
+
+[node name="ScoreTimer" type="Timer" parent="GameLogic"]
+
+[node name="StartPosition" type="Marker2D" parent="GameLogic"]
+position = Vector2(640, 400)
+
+[node name="Path2D" type="Path2D" parent="GameLogic"]
+curve = SubResource("Curve2D_oshl3")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="GameLogic/Path2D"]
+
+[node name="Player" parent="GameLogic" instance=ExtResource("4_kwype")]
+
+[connection signal="timeout" from="GameLogic/SpawnTimer" to="GameLogic" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="GameLogic/RespawnTimer" to="GameLogic" method="_on_respawn_timer_timeout"]
+[connection signal="timeout" from="GameLogic/ScoreTimer" to="GameLogic" method="_on_score_timer_timeout"]
+[connection signal="hit" from="GameLogic/Player" to="GameLogic" method="game_over"]
