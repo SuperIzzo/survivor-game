@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://cq7j51ynwgcxa"]
+
+[ext_resource type="Script" path="res://Scenes/Player.gd" id="1_57lrx"]
+[ext_resource type="Texture2D" uid="uid://cso1cny0onimq" path="res://Assets/Textures/DungeonCrawl_ProjectUtumnoTileset.png" id="1_h6jk1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f45q0"]
+atlas = ExtResource("1_h6jk1")
+region = Rect2(416, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3owc"]
+atlas = ExtResource("1_h6jk1")
+region = Rect2(448, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8mux"]
+atlas = ExtResource("1_h6jk1")
+region = Rect2(480, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bngut"]
+atlas = ExtResource("1_h6jk1")
+region = Rect2(512, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wstmq"]
+atlas = ExtResource("1_h6jk1")
+region = Rect2(544, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihxjh"]
+atlas = ExtResource("1_h6jk1")
+region = Rect2(576, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmyim"]
+atlas = ExtResource("1_h6jk1")
+region = Rect2(608, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gja7i"]
+atlas = ExtResource("1_h6jk1")
+region = Rect2(640, 384, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_864le"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f45q0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3owc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8mux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bngut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wstmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihxjh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmyim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gja7i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6xlih"]
+height = 34.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="Area2D" parent="."]
+script = ExtResource("1_57lrx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+sprite_frames = SubResource("SpriteFrames_864le")
+frame_progress = 0.16374
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_6xlih")
