@@ -71,6 +71,7 @@ animations = [{
 height = 34.0
 
 [node name="Player" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_57lrx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -79,5 +80,8 @@ frame_progress = 0.16374
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_6xlih")
+
+[node name="FireballCooldown" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

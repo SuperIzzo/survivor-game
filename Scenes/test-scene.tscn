@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cckqowpa0nbg4"]
+[gd_scene load_steps=8 format=3 uid="uid://cckqowpa0nbg4"]
 
 [ext_resource type="PackedScene" uid="uid://bvetfy73p8471" path="res://Assets/Maps/test-map.tscn" id="1_s48sj"]
 [ext_resource type="Script" path="res://Scenes/GameLogic.gd" id="2_n20w1"]
 [ext_resource type="PackedScene" uid="uid://dqfueckqakcbe" path="res://Scenes/enemy.tscn" id="3_0cq5r"]
 [ext_resource type="PackedScene" uid="uid://cq7j51ynwgcxa" path="res://Scenes/Player.tscn" id="4_kwype"]
+[ext_resource type="PackedScene" uid="uid://d3n5okylk36jm" path="res://Scenes/fireball.tscn" id="4_wqbjq"]
+[ext_resource type="PackedScene" uid="uid://bcyvm4q0u1fva" path="res://Scenes/hud.tscn" id="5_dm5ok"]
 
 [sub_resource type="Curve2D" id="Curve2D_oshl3"]
 _data = {
@@ -18,8 +20,9 @@ point_count = 5
 [node name="GameLogic" type="Node" parent="."]
 script = ExtResource("2_n20w1")
 mob_scene = ExtResource("3_0cq5r")
+fireball_scene = ExtResource("4_wqbjq")
 
-[node name="SpawnTimer" type="Timer" parent="GameLogic"]
+[node name="EnemySpawnTimer" type="Timer" parent="GameLogic"]
 
 [node name="RespawnTimer" type="Timer" parent="GameLogic"]
 wait_time = 3.0
@@ -37,7 +40,11 @@ curve = SubResource("Curve2D_oshl3")
 
 [node name="Player" parent="GameLogic" instance=ExtResource("4_kwype")]
 
-[connection signal="timeout" from="GameLogic/SpawnTimer" to="GameLogic" method="_on_spawn_timer_timeout"]
+[node name="HUD" parent="GameLogic" instance=ExtResource("5_dm5ok")]
+
+[connection signal="timeout" from="GameLogic/EnemySpawnTimer" to="GameLogic" method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="GameLogic/RespawnTimer" to="GameLogic" method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="GameLogic/ScoreTimer" to="GameLogic" method="_on_score_timer_timeout"]
 [connection signal="hit" from="GameLogic/Player" to="GameLogic" method="game_over"]
+[connection signal="spawnFireball" from="GameLogic/Player" to="GameLogic" method="fireBall"]
+[connection signal="start_game" from="GameLogic/HUD" to="GameLogic" method="new_game"]
